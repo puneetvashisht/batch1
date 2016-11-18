@@ -4,7 +4,7 @@ var tsc = require("gulp-typescript");
 var sourcemaps = require('gulp-sourcemaps');
 var tsProject = tsc.createProject("tsconfig.json");
 var tslint = require('gulp-tslint');
-var appDev = 'basic';
+var appDev = '02states';
 
 gulp.task('clean', function (cb) {
     return del(["build"], cb);
