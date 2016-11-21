@@ -4,7 +4,7 @@ var tsc = require("gulp-typescript");
 var sourcemaps = require('gulp-sourcemaps');
 var tsProject = tsc.createProject("tsconfig.json");
 var tslint = require('gulp-tslint');
-var appDev = '01-databindings';
+var appDev = '01-services';
 /**
  * Remove build directory.
  */
