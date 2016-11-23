@@ -1,0 +1,60 @@
+<button (click)="loadData()">LoadData</button>
+<hr/>
+
+
+<div>
+    <Button *ngIf="!isNewEmp" (click)="newEmp()">Add Employee</Button>
+        <div *ngIf="isNewEmp">
+            Id: <input type="text" #empId id="empId"/>
+            Name: <input type="text" #empName id="empName"/>
+            Age: <input type="text" #empAge id="empAge"/>
+            <button (click)="addNewEmp(empId.value, empName.value, empAge.value)">AddEmp</button>
+            <button (click)="isNewEmp = false">Cancle</button>
+        </div>
+		<div *ngIf="isEdit">
+            Id: <input type="text" #newId value={{previousEmp.id}} />
+            Name: <input type="text" #newName value={{previousEmp.name}} />
+            Age: <input type="number" #newAge value={{previousEmp.age}} />
+            <button (click)="updateEmp(newId.value, newName.value, newAge.value)">Update</button>
+            <button (click)="isEdit = false">Cancle</button>
+        </div>
+
+    <table border="1">
+        <thead>
+            <tr><th colspan="3">{{title}}</th></tr>
+            <tr>
+                <th>Emp Id</th>
+                <th>Emp Name</th>
+                <th>Emp Age</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let emp of empData">
+            <td>{{emp.id}}</td>
+            <td>{{emp.name}}</td>
+            <td>{{emp.age}}</td>
+            <td><button (click)="editEmp(emp)">Edit</button></td>
+            <td><button (click)="deleteEmp(emp)">Delete</button></td>
+        </tr>
+<!--
+        <tr *ngIf="isNewEmp">
+            <td><label for="empId">Id</label><input type="text" #empId id="empId"/></td>
+            <td><label for="empName">Name</label><input type="text" #empName id="empName"/></td>
+            <td><label for="empAge">Age</label><input type="text" #empAge id="empAge"/></td>
+            <td><button (click)="addNewEmp(empId.value, empName.value, empAge.value)">AddEmp</button></td>
+        </tr>
+-->
+<!--
+        <tr *ngIf="isEdit">
+            <td><label for="newId">Id</label><input type="text" #newId id="newId"/></td>
+            <td><label for="newName">Name</label><input type="text" #newName id="newName"/></td>
+            <td><label for="newAge">Age</label><input type="text" #newAge id="newAge"/></td>
+            <td><button (click)="submitEditEmp(newId.value, newName.value, newAge.value)">Submit Change</button></td>
+        </tr>
+-->
+        </tbody>
+    </table>
+</div>
+<!--
+<div>{{empData  |json}}</div>
+-->
