@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<title>HTML Template Demo</title>
+	</head>
+	<body>
+		<h1>Template is not visible in DOM</h1>
+		<button onclick="addSimple()">Click Me</button>
+		<div id="simple-target">Some content</div>
+		<template id="simple">
+			<style>
+				span { color: purple; }
+			</style>
+
+			<img src="//lorempixel.com/200/200/sports/2" />
+			<span>Hello World!</span>
+
+			<script>
+				(function boom(){
+					alert("BOOM!");
+				})();
+			</script>
+			<content></content>
+		</template>
+
+		<script>
+			function addSimple(){
+				// Grab our template
+				var template = document.querySelector('template#simple').content;
+
+				// Optional -- Modify template
+
+				// Clone and add
+				var clone = document.importNode(template, true);
+				document.getElementById("simple-target").appendChild(clone);
+			}
+		</script>
+	</body>
+</html>
