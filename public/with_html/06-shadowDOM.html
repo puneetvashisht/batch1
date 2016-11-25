@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		div {
+			text-shadow: 0 0 5px red;
+		}
+		
+		.test {
+			text-align: center;
+		}
+	</style>
+	<script>
+		var index = 10;
+		var names = ['Bob', 'Shellie', 'Mark', 'Carl'];
+
+	</script>
+</head>
+
+<body>
+
+
+	<h3>Without template</h3>
+	<hr/>
+	<div class="outer test">
+		<div class="boilerplate">
+			Hi! My name is Puneet
+		</div>
+		<div class="name">
+			<content></content>
+		</div>
+	</div>
+	<br/>
+	<h3>With template - #shadow-root comes to the picture</h3>
+	<hr/>
+	<div id="nameTag">Puneet</div>
+	<template id="nameTagTemplate">
+		<style>
+			.outer {
+				border: 2px solid #50a03f;
+				border-radius: 1em;
+				background: rgba(36, 207, 111, 0.67);
+				font-size: 20pt;
+				width: 12em;
+				height: 7em;
+				text-align: center;
+			}
+			
+			.boilerplate {
+				font-family: sans-serif;
+				padding: 0.5em;
+			}
+			
+			.name {
+				background: white;
+				font-family: "Marker Felt", cursive;
+				font-size: 45pt;
+				padding-top: 0.2em;
+			}
+			
+			div {
+				color: cornflowerblue;
+			}
+			
+		</style>
+	<button onclick="update()">Update</button>
+		<div class="outer test">
+			<div class="boilerplate">
+				Hi! My name is
+			</div>
+			<div class="name">
+				<content></content>
+			</div>
+		</div>
+
+		<script>
+			//override global variable
+			var index = 0;
+			console.log(index)
+			console.log(names)
+			
+			var update = function() {
+				index = (index === names.length - 1) ? 0 : ++index;
+				//using names arr as global variable
+				document.querySelector('#nameTag').textContent = names[index];
+			}
+		</script>
+	</template>
+	<script>
+		var shadow = document.querySelector('#nameTag').createShadowRoot();
+		var template = document.querySelector('#nameTagTemplate');
+		var clone = document.importNode(template.content, true);
+		shadow.appendChild(clone);
+	</script>
+	<h3>CSS written globally will be global, however styles defined inside the template will be locally scoped to that template only.</h3>
+	<ul>
+		<li>The problem in the way we create web applications lies in the “global-like” architecture that HTML, CSS and JavaScript gives us.</li>
+		<li>Shadow DOM creates DOM inside DOM, combining multiple DOM trees into a single hierarchy.</li>
+		<li>These chunks of isolated DOM act as a “shield” around all these global entities such as CSS and JavaScript logic and are locally scoped to one another.</li>
+	</ul>
+</body>
+
+</html>

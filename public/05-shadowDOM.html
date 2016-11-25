@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Shadow DOM in HTML</title>
+
+</head>
+
+<body>
+
+	<button onclick="update()">Update</button>
+	<div id="nameTag">Bob</div>
+
+	<template id="nameTagTemplate">
+		<style>
+			:host{
+				background: red;
+				width: 350px;
+				height: 150px;
+				text-align: center;
+				border-radius: 10px;
+				font-size: 24px;
+				padding-top: 50px;
+			}
+			.name,.boilerplate{
+				color: white;
+				font-size: 30px;
+			}
+			.name{
+				text-shadow: 20px 25px 6px blue;
+				font-size: 36px;
+			}
+		</style>
+		<div class="outer">
+			<div class="boilerplate">
+				Hi! My name is
+			</div>
+			<div class="name">
+				<content></content>
+
+			</div>
+		</div>
+	</template>
+
+	<script>
+		var shadow = document.querySelector('#nameTag').createShadowRoot();
+		var template = document.querySelector('#nameTagTemplate');
+		var clone = document.importNode(template.content, true);
+		shadow.appendChild(clone);
+
+
+		var update = function() {
+			index = (index === names.length - 1) ? 0 : ++index;
+			document.querySelector('#nameTag').textContent = names[index];
+		}
+		var index = 0;
+		var names = ['Bob', 'Shellie', 'Mark', 'Carl'];
+
+	</script>
+
+</body>
+
+</html>
