@@ -9,3 +9,7 @@ To create a package.json and install dependencies
 Steps:
 1. npm init
 2. npm install --save module_name
+
+<hr>
+
+Email: puneetvashisht@gmail.com
